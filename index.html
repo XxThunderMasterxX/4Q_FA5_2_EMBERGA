@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacts List</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h2>Contacts List</h2>
+<p>Add a contact:</p>
+<input type="text" id="contactInput">
+<button onclick="addContact()">Add</button>
+<button onclick="removeContact()">Remove</button>
+<div id="contacts"></div>
+
+<script>
+var contacts = [];
+
+function addContact() {
+  var contactInput = document.getElementById("contactInput");
+  var contactName = contactInput.value.trim();
+
+  if (contactName === "") {
+    alert("Please enter a contact name.");
+    return;
+  }
+
+  if (contacts.length === 7) {
+    contacts.shift(); 
+  }
+
+  contacts.push(contactName);
+  displayContacts();
+  contactInput.value = ""; 
+}
+
+function removeContact() {
+  if (contacts.length === 0) {
+    alert("Contacts list is empty.");
+    return;
+  }
+
+  contacts.pop();
+  displayContacts();
+}
+
+function displayContacts() {
+  var contactsDiv = document.getElementById("contacts");
+  contactsDiv.innerHTML = "<p>Contacts:</p><ul>";
+
+  contacts.forEach(function(contact) {
+    contactsDiv.innerHTML += "<li>" + contact + "</li>";
+  });
+
+  contactsDiv.innerHTML += "</ul>";
+}
+</script>
+
+</body>
+</html>
